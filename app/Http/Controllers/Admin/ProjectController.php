@@ -56,10 +56,10 @@ class ProjectController extends Controller
      * Display the specified resource.
      * SHOW
      */
-    public function show($slug)
-    {
-        $projects = Project::findOrFail($slug);
-        return view("admin.projects.show", ["projects"=>$projects]);
+    public function show($slug) {
+        $project = Project::where("slug", $slug)->first(); 
+
+        return view("admin.projects.show", ["project"=>$project]);
     }
 
     /**

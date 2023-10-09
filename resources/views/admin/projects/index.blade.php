@@ -8,7 +8,6 @@
         current series
       </button>
     </div>
-    <!--Comics-->
     <div>
       <div class="d-flex flex-wrap custom-style">
         
@@ -31,9 +30,9 @@
       </div>
     </div>
     <div class="text-center mb-3">
-      <a class="nav-link" href="/comic/create">
-      <button class="text-uppercase fw-bold fs-6 p-2" type="button">
-        Add comic
+      <a class="nav-link" href="/admin/projects/create">
+      <button class="add-btn fw-bold text-white btn btn-danger" type="button">
+        <i class="fa-solid fa-plus"></i>
       </button></a>
       
     </div>

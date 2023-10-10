@@ -24,15 +24,22 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {//Tutte devono iniziare con admin ok
     //CREATE // Il create aveva bisogno dello /admin perchè veniva sovrascritto da slug
     Route::get("/admin/projects/create", [ProjectController::class, "create"])->name("admin.projects.create");//Indirizza ad una pagina con form per inserire i dati del progetto;
     Route::post("/admin/projects", [ProjectController::class, "store"])->name("admin.projects.store");//Rotta di dove verranno inviati i dati. Essa è in POST.
     
-    //READ 
-    Route::get('/admin/projects/{slug}', [ProjectController::class, "show"])->name("projects.show"); //Dettagli di un Elemento
+     // //READ 
     Route::get('/admin/projects', [ProjectController::class, "index"])->name("admin.projects.index"); //Anteprima dei progetti
+    Route::get("/admin/projects/trash", [ProjectController::class, "trash"])->name("admin.projects.trash");//Trashbin
+    Route::get('/admin/projects/{slug}', [ProjectController::class, "show"])->name("admin.projects.show"); //Dettagli di un Elemento
+
+     // //DESTROY - il metodo è DELETE e anche sul controller è $Projects->delete();
+    Route::delete('/admin/projects/{slug}', [ProjectController::class, "destroy"])->name("admin.projects.destroy");
 });
+
+
 
 
 

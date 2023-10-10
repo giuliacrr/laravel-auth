@@ -9,8 +9,7 @@
       </button>
     </div>
     <div>
-      <div class="d-flex flex-wrap custom-style">
-        
+      <div class=" mt-5 custom-style">
         
         <div class="card mb-3">
           <div class="row g-0">
@@ -21,13 +20,30 @@
               <div class="card-body">
                 <h5 class="card-title">{{$project['name']}}</h5>
                 <p class="card-text">{{$project['description']}}</p>
-                <p class="card-text">{{$project['url']}}</p>
+                <a class="card-text">{{$project['url']}}</a>
                 <p class="card-text"><small class="text-body-secondary">{{$project['publication_time']->format("d/m/Y")}}</small></p>
-                <div><a href="{{ route('projects.show', $project['slug']) }}"><button class="btn btn-danger">Delete</button></a></div>
+                <!--Soft Delete-->
+                {{-- <form action="{{ route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline-block">
+                  @csrf
+                  @method("DELETE")
+                  <a class="nav-link ms-3" href="/admin/projects/create">
+                    <button class="delete-btn fw-bold text-white btn border border-danger" type="submit">
+                      <i class="fa-regular fa-trash-can text-danger"></i>
+                    </button>
+                  </a>
+                </form> --}}
+
+                <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
+                  @csrf
+                  @method("DELETE")
+                  <button type="submit" class="btn btn-danger">Elimina</button>
+                </form>
+
               </div>
             </div>
           </div>
-        </div> 
+        </div>
+        
       </div>
     </div>
     <div class="text-center mb-3">

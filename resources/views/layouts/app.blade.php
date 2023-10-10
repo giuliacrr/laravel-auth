@@ -52,6 +52,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('admin.projects.create')}}">{{ __('Add a project') }}</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('admin.projects.trash')}}">{{ __('Deleted projects') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -9,8 +9,7 @@
       </button>
     </div>
     <div>
-      <div class="d-flex flex-wrap custom-style">
-        
+      <div class="d-flex flex-wrap mt-5 custom-style">
         @foreach($projects as $repo)
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
@@ -21,7 +20,10 @@
               <div class="card-body">
                 <h5 class="card-title">{{$repo['name']}}</h5>
                 <p class="card-text"><small class="text-body-secondary">{{$repo['publication_time']->format("d/m/Y")}}</small></p>
-                <div><a href="{{ route('projects.show', $repo['slug']) }}"><button class="btn btn-danger">Show more</button></a></div>
+                <div class="d-flex align-items-center">
+                  <!--Show-->
+                  <a href="{{ route('admin.projects.show', $repo['slug']) }}"><button class="btn btn-danger">Show more</button></a>
+                </div>
               </div>
             </div>
           </div>

@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 class ProjectController extends Controller 
 {
     /**
-     * Display a listing of the resource.
      * INDEX
      */
     public function index()
@@ -21,7 +20,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
      * CREATE
      */
     public function create()
@@ -30,11 +28,10 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
      * STORE
      */
-    public function store(Request $request)
-    {   
+    public function store(Request $request){   
+
         $data = $request->validate([
             "name"=>"required|string",
             //<1mb
@@ -52,12 +49,10 @@ class ProjectController extends Controller
         //$newProject->save();
         //Con questa stringa, creo tutte e tre le sovrastranti in una
         $newProject = Project::create($data);
-
         return redirect()->route('admin.projects.index');
     }
 
     /**
-     * Display the specified resource.
      * SHOW
      */
     public function show($slug) {
@@ -67,7 +62,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
      * EDIT
      */
     public function edit(Project $project)
@@ -76,7 +70,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
      * UPDATE
      */
     public function update(Request $request, Project $project)
@@ -84,14 +77,31 @@ class ProjectController extends Controller
         //
     }
 
+
     /**
-     * Remove the specified resource from storage.
+     * TRASH
+     */
+    public function trash() {
+        $Projects = Project::onlyTrashed()->get();
+        return view("admin.projects.trash", ["Projects" => $Projects]);
+    }
+
+    /**
      * DESTROY
      */
-    public function destroy(Project $project)
-    {
-        //
+    public function destroy(Request $request, $slug){
+        if ($request->input("force")) {
+            $Projects = Project::onlyTrashed()->where("slug", $slug)->first();
+             //Force delete (permanente)
+            $Projects->forceDelete();
+        }else {
+            $Projects = Project::where("slug", $slug)->first(); 
+             //Soft delete (non permanente -> trash)
+            $Projects->delete();
+        }
+        return redirect()->route('admin.projects.index');
     }
+    
 
     //Gentilmente rubato a Florian 💖
     protected function generateSlug($name) {

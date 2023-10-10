@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller 
@@ -36,18 +37,20 @@ class ProjectController extends Controller
     {
         $data = $request->validate([
             "name"=>"required|string",
-            "image"=>"required|string",
+            "image"=>"required|image|max:5120",
             "url"=>"required|string",
             "description"=>"required|string",
             "publication_time"=>"required|date",
         ]);
 
         $data["slug"] = $this->generateSlug($data["name"]);
-
-        $newProject = new Project();
-        $newProject->fill($data);
-
-        $newProject->save();
+        $data["image"] = Storage::put("projects", $data["image"]);
+        
+        //$newProject = new Project();
+        //$newProject->fill($data);
+        //$newProject->save();
+        //Con questa stringa, creo tutte e tre le sovrastranti in una
+        $newProject = Project::create($data);
 
         return redirect()->route('admin.projects.index');
     }

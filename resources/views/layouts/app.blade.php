@@ -47,10 +47,10 @@
                             <a class="nav-link" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('projects.index') }}">{{ __('Projects') }}</a>
+                            <a class="nav-link" href="{{route('admin.projects.index') }}">{{ __('Projects') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('projects.create')}}">{{ __('Add a project') }}</a>
+                            <a class="nav-link" href="{{route('admin.projects.create')}}">{{ __('Add a project') }}</a>
                         </li>
                     </ul>
 

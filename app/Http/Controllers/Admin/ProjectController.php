@@ -49,7 +49,7 @@ class ProjectController extends Controller
 
         $newProject->save();
 
-        return redirect()->route('projects.index');
+        return redirect()->route('admin.projects.index');
     }
 
     /**

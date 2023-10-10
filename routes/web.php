@@ -24,14 +24,14 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    //READ
-    Route::get('/projects/{slug}', [ProjectController::class, "show"])->name("projects.show"); //Dettagli di un Elemento
-    Route::get('/projects', [ProjectController::class, "index"])->name("projects.index"); //Anteprima dei progetti
+Route::middleware('auth')->group(function () {//Tutte devono iniziare con admin ok
+    //CREATE // Il create aveva bisogno dello /admin perchè veniva sovrascritto da slug
+    Route::get("/admin/projects/create", [ProjectController::class, "create"])->name("admin.projects.create");//Indirizza ad una pagina con form per inserire i dati del progetto;
+    Route::post("/admin/projects", [ProjectController::class, "store"])->name("admin.projects.store");//Rotta di dove verranno inviati i dati. Essa è in POST.
     
-    //CREATE //CHIEDI A FLORIAN COSA E COME E PERCHé
-    Route::get("/admin/projects/create", [ProjectController::class, "create"])->name("projects.create");//Indirizza ad una pagina con form per inserire i dati del progetto;
-    Route::post("/projects", [ProjectController::class, "store"])->name("projects.store");//Rotta di dove verranno inviati i dati. Essa è in POST. 
+    //READ 
+    Route::get('/admin/projects/{slug}', [ProjectController::class, "show"])->name("projects.show"); //Dettagli di un Elemento
+    Route::get('/admin/projects', [ProjectController::class, "index"])->name("admin.projects.index"); //Anteprima dei progetti
 });
 
 

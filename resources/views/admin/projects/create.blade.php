@@ -3,7 +3,7 @@
 @section('content')
 <div class="container mt-5">
   <h2>Add a project!</h2>
-  <form class="mt-5" action="{{ route('projects.store') }}" method="POST">
+  <form class="mt-5" action="{{ route('admin.projects.store') }}" method="POST">
     @csrf()
 
     <!--Project name-->
@@ -17,7 +17,7 @@
     <!--Project publication date-->
     <div class="mb-3"><label class="form-label fw-bold">Creation Date:</label><input type="text" class="form-control" name="publication_time"></div>
 
-    <a class="btn btn-secondary" href="{{ route("projects.index") }}">Cancel</a>
+    <a class="btn btn-secondary" href="{{ route("admin.projects.index") }}">Cancel</a>
     <button class="btn btn-danger">Save</button>
   </form>
 </div>

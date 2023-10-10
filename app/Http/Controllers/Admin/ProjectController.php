@@ -34,18 +34,19 @@ class ProjectController extends Controller
      * STORE
      */
     public function store(Request $request)
-    {
+    {   
         $data = $request->validate([
             "name"=>"required|string",
-            "image"=>"required|image|max:5120",
+            //<1mb
+            "image"=>"required|image|mimes:jpeg,png,jpg|max:1024",
             "url"=>"required|string",
             "description"=>"required|string",
             "publication_time"=>"required|date",
         ]);
-
+        
         $data["slug"] = $this->generateSlug($data["name"]);
         $data["image"] = Storage::put("projects", $data["image"]);
-        
+        //Se il problema è qui, che sia create o singolarmente scritte le seguenti righe, non funziona.
         //$newProject = new Project();
         //$newProject->fill($data);
         //$newProject->save();

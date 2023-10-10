@@ -15,7 +15,7 @@
       <label class="btn btn-outline btn-danger" type="button"><input type="file" accept="image/*" class="form-control" name="image"></label>
     </div> --}}
     <div class="mb-3">
-      <label class="form-label">Immage</label>
+      <label class="form-label">Image</label>
       <input type="file" accept="image/*" class="form-control" name="image">
     </div>
     <!--Project url-->

@@ -64,17 +64,32 @@ class ProjectController extends Controller
     /**
      * EDIT
      */
-    public function edit(Project $project)
+    public function edit($slug)
     {
-        
+        $project = Project::where("slug", $slug)->first();
+        return view('admin.projects.edit', ["project"=> $project]);
     }
 
     /**
      * UPDATE
      */
-    public function update(Request $request, Project $project)
-    {
-        //
+    public function update(Request $request, $slug)
+    {   $project = Project::where("slug", $slug)->first();
+
+        $data = $request->validate([
+            "name"=>"required|string",
+            //<1mb
+            "image"=>"required|image|mimes:jpeg,png,jpg|max:5120",
+            "url"=>"required|string",
+            "description"=>"required|string",
+            "publication_time"=>"required|date",
+        ]);
+        
+        $data["slug"] = $this->generateSlug($data["name"]);
+        $data["image"] = Storage::put("projects", $data["image"]);
+
+        $project->update($data);
+        return redirect()->route('admin.projects.index');
     }
 
 

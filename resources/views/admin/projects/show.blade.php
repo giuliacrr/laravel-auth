@@ -32,12 +32,14 @@
                     </button>
                   </a>
                 </form> --}}
-
-                <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
-                  @csrf
-                  @method("DELETE")
-                  <button type="submit" class="btn btn-danger">Elimina</button>
-                </form>
+                <div class="d-flex">
+                  <a href="{{ route('admin.projects.edit', $project->slug) }}" class="btn btn-warning me-2">Edit</a>
+                  <form action="{{ route('admin.projects.destroy', $project->slug) }}" method="POST">
+                    @csrf
+                    @method("DELETE")
+                    <button type="submit" class="btn btn-danger">Elimina</button>
+                  </form>
+                </div>
 
               </div>
             </div>

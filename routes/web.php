@@ -35,6 +35,10 @@ Route::middleware('auth')->group(function () {//Tutte devono iniziare con admin 
     Route::get("/admin/projects/trash", [ProjectController::class, "trash"])->name("admin.projects.trash");//Trashbin
     Route::get('/admin/projects/{slug}', [ProjectController::class, "show"])->name("admin.projects.show"); //Dettagli di un Elemento
 
+    //UPDATE
+    Route::get('/admin/projects/{slug}/edit', [ProjectController::class, "edit"])->name('admin.projects.edit');
+    Route::match(['patch', 'put'], '/admin/projects/{slug}/update', [ProjectController::class, "update"])->name('admin.projects.update');
+
      // //DESTROY - il metodo è DELETE e anche sul controller è $Projects->delete();
     Route::delete('/admin/projects/{slug}', [ProjectController::class, "destroy"])->name("admin.projects.destroy");
 });
